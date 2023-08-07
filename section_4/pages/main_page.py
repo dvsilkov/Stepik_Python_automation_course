@@ -1,9 +1,7 @@
-from selenium.webdriver.common.by import By
+# Теперь реализуем Page Object, который будет связан с главной страницей интернет-магазина.
 
 # Чтобы импортировать нужное нам исключение, в самом верху файла нужно указать:
-from  selenium.common.exceptions import NoSuchElementException
-
-# Теперь реализуем Page Object, который будет связан с главной страницей интернет-магазина.
+from selenium.common.exceptions import NoSuchElementException
 
 # нужно сделать импорт базового класса BasePage
 from section_4.pages.base_page import BasePage
@@ -32,7 +30,7 @@ class MainPage(BasePage):
         #login_link.click()
 
         # с использование файла locators.py
-        login_link = self.browser.find_element(*MainPageLocators.Login_Link)
+        login_link = self.browser.find_element(*MainPageLocators.login_link_locator)
         login_link.click()
 
     # нужно реализовать метод, который будет проверять наличие ссылки. Обычно все такие методы-проверки называются
@@ -43,5 +41,5 @@ class MainPage(BasePage):
         #assert self.if_element_presented(By.CSS_SELECTOR, "#registration_link"), "Login link is not presented"
 
         # с использование файла locators.py
-        assert self.if_element_presented(*MainPageLocators.Login_Link), "Login link is not presented"
+        assert self.if_element_presented(*MainPageLocators.login_link_locator), "Login link is not presented"
 
