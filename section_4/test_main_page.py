@@ -1,4 +1,4 @@
-# нужно импортировать класс, описывающий главную страницу:
+# нужно импортировать классы, описывающие страницы методы для которых будем использовать:
 from section_4.pages.main_page import MainPage
 from section_4.pages.login_page import LoginPage
 
