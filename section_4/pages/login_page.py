@@ -3,21 +3,10 @@
 # нужно сделать импорт базового класса BasePage
 from section_4.pages.base_page import BasePage
 
-# Чтобы импортировать нужное нам исключение, в самом верху файла нужно указать:
-from selenium.common.exceptions import NoSuchElementException
-
 # импортируйте новый класс с локаторами
 from section_4.pages.locators import LoginPageLocators
 
 class LoginPage(BasePage):
-    # в этом классе реализуем метод is_element_present, в котором будем перехватывать исключение.
-    # В него будем передавать два аргумента: как искать (css, id, xpath и тд) и собственно что искать (строку-селектор).
-    def if_element_presented(self, how, what):
-        try:
-            self.browser.find_element(how, what)
-        except NoSuchElementException:
-            return False
-        return True
 
     def should_be_login_page(self):
         self.should_be_login_url()
