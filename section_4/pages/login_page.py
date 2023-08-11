@@ -7,6 +7,18 @@ from section_4.pages.base_page import BasePage
 from section_4.pages.locators import LoginPageLocators
 
 class LoginPage(BasePage):
+    # метод, который принимает две строки и регистрирует пользователя
+    def register_new_user(self, email, password):
+        input_email = self.browser.find_element(*LoginPageLocators.input_email_locator)
+        input_email.send_keys(email)
+
+        input_password1 = self.browser.find_element(*LoginPageLocators.input_password1_locator)
+        input_password1.send_keys(password)
+
+        input_password2 = self.browser.find_element(*LoginPageLocators.input_password2_locator)
+        input_password2.send_keys(password)
+        register_button = self.browser.find_element(*LoginPageLocators.button_register_locator)
+        register_button.click()
 
     def should_be_login_page(self):
         self.should_be_login_url()

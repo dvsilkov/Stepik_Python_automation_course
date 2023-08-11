@@ -3,9 +3,6 @@
 # нужно сделать импорт базового класса BasePage
 from section_4.pages.base_page import BasePage
 
-# Чтобы импортировать нужное нам исключение, в самом верху файла нужно указать:
-from selenium.common.exceptions import NoSuchElementException
-
 # импортируйте новый класс с локаторами
 from section_4.pages.locators import ProductPageLocators
 

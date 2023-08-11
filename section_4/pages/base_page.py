@@ -1,16 +1,18 @@
+import math
+
 # Чтобы импортировать нужное нам исключение, в самом верху файла нужно указать:
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import math
 
 # импортируйте необходимые классы с локаторами
 from section_4.pages.locators import BasePageLocators
 
-
-# Для начала сделаем базовую страницу, от которой будут унаследованы все остальные классы. В ней мы опишем вспомогательные методы для работы с драйвером.
+# Для начала сделаем базовую страницу, от которой будут унаследованы все остальные классы.
+# В ней мы опишем вспомогательные методы для работы с драйвером.
+# Также добавим методы и проверки, которые могут быть использованы на любой странице
 class BasePage():
     # Теперь в наш класс нужно добавить методы. Первым делом добавим конструктор — метод, который вызывается,
     # когда мы создаем объект. Конструктор объявляется ключевым словом __init__. В него в качестве параметров мы
@@ -65,13 +67,13 @@ class BasePage():
         except NoAlertPresentException:
             print("No second alert presented")
 
+    # проверку того, что пользователь залогинен
+    def should_be_authorized_user(self):
+        assert self.if_element_presented(*BasePageLocators.user_icon_locator), "User icon is not presented, probably unauthorised user"
+
     # Создаем метод для нажатия кнопки, нужно указать аргумент self , чтобы иметь доступ к атрибутам и методам класса:
     def go_to_login_page(self):
         # Так как браузер у нас хранится как аргумент класса BasePage, обращаться к нему нужно соответствующим образом с помощью self
-
-        # без использования файла locators.py
-        #login_link = self.browser.find_element(By.CSS_SELECTOR, "#login_link")
-        #login_link.click()
 
         # с использование файла locators.py
         login_link = self.browser.find_element(*BasePageLocators.login_link_locator)
@@ -81,8 +83,6 @@ class BasePage():
     # похожим образом, мы будем называть их should_be_(название элемента).
     # для получения сообщения используем assert и метод проверки элемента
     def should_be_login_link(self):
-        # без использования файла locators.py
-        #assert self.if_element_presented(By.CSS_SELECTOR, "#registration_link"), "Login link is not presented"
 
         # с использование файла locators.py
         assert self.if_element_presented(*BasePageLocators.login_link_locator), "Login link is not presented"
